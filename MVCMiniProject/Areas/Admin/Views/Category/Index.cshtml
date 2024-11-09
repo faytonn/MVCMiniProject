@@ -1,0 +1,22 @@
+﻿@model IEnumerable<DataAccessLayer.Entities.Category>
+
+<h2>Categories</h2>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var category in Model)
+    {
+        <tr>
+            <td>@category.Name</td>
+            <td>@category.Description</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@category.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@category.Id">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
+<a asp-action="Create" class="btn btn-primary">Create New Category</a>
