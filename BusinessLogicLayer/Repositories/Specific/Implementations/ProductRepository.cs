@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer.Repositories.Specific.Abstractions;
 using DataAccessLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using MVCMiniProject.DataAccessLayer;
 
 namespace BusinessLogicLayer.Repositories.Specific.Implementations
