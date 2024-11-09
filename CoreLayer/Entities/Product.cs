@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Entities.Base;
+﻿using CoreLayer.Entities;
+using DataAccessLayer.Entities.Base;
 
 namespace DataAccessLayer.Entities
 {
@@ -11,11 +12,9 @@ namespace DataAccessLayer.Entities
         public bool IsAvailable { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        public List<ProductImage> ProductImages { get; set; }
-        public List<Tag> Tags { get; set; } = new List<Tag>();
+        public List<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
+        public List<ProductTag> ProductTags { get; set; } = new List<ProductTag>();
         public List<BasketItem> BasketItems { get; set; } = new List<BasketItem>();
-        public bool IsFeatured { get; set; }
-        public bool IsBestSeller { get; set; }
-        public bool IsNew {  get; set; }
+
     }
 }

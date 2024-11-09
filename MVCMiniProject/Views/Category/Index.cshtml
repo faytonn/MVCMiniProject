@@ -1,0 +1,15 @@
+﻿@model IEnumerable<DataAccessLayer.Entities.Category>
+
+@if (Model == null || !Model.Any())
+{
+    <p>No categories found.</p>
+}
+else
+{
+    <ul>
+        @foreach (var category in Model)
+        {
+            <li>@category.Name</li>
+        }
+    </ul>
+}

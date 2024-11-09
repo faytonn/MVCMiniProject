@@ -15,6 +15,13 @@ namespace MVCMiniProject
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<AppDBContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddTransient<DBInitializer>();
+
+            builder.Services.AddScoped<IRepository, Repository>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+
+
 
             builder.Services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDBContext>()
@@ -26,12 +33,15 @@ namespace MVCMiniProject
                 options.AccessDeniedPath = "/Account/AccessDenied";
             });
 
+
+
             var app = builder.Build();
+
 
             using (var scope = app.Services.CreateScope())
             {
-                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-                await DBInitializer.SeedRolesAsync(roleManager);
+                var dbInitializer = scope.ServiceProvider.GetRequiredService<DBInitializer>();
+                await dbInitializer.SeedDataAsync();
             }
 
             if (!app.Environment.IsDevelopment())
