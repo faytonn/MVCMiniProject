@@ -22,7 +22,18 @@ namespace MVCMiniProject.DataAccessLayer
         public DbSet<Setting> Settings { get; set; }
 
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
 
+            builder.Entity<Product>().HasMany(p => p.Tags).WithMany(t => t.Products).UsingEntity(j => j.ToTable("ProductTags"));
+
+            builder.Entity<ProductImage>().HasOne(pi => pi.Product).WithMany(p => p.ProductImages).HasForeignKey(pi => pi.ProductId).OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<BasketItem>().HasOne(bi => bi.Product).WithMany(p => p.BasketItems).HasForeignKey(bi=>bi.ProductId).OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<BasketItem>().HasOne(bi=>bi.User).WithMany().HasForeignKey(bi=>bi.UserId).OnDelete(DeleteBehavior.NoAction);
+        }
 
     }
 }
