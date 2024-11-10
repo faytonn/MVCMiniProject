@@ -19,6 +19,19 @@ namespace MVCMiniProject.Controllers
             _roleManager = roleManager;
         }
 
+        public async Task<IActionResult> InitializeRoles()
+        {
+            if (!await _roleManager.RoleExistsAsync("Admin"))
+                await _roleManager.CreateAsync(new IdentityRole("Admin"));
+
+            if (!await _roleManager.RoleExistsAsync("Moderator"))
+                await _roleManager.CreateAsync(new IdentityRole("Moderator"));
+
+            if (!await _roleManager.RoleExistsAsync("Member"))
+                await _roleManager.CreateAsync(new IdentityRole("Member"));
+
+            return Content("Roles initialized");
+        }
 
         public IActionResult Register()
         {

@@ -3,6 +3,9 @@ using DataAccessLayer.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MVCMiniProject.DataAccessLayer;
+using MVCMiniProject.
+
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MVCMiniProject
 {
@@ -18,7 +21,10 @@ namespace MVCMiniProject
             builder.Services.AddTransient<DBInitializer>();
 
             builder.Services.AddScoped<IRepository, Repository>();
-            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<ITagService, TagService>();
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
 

@@ -1,4 +1,6 @@
-﻿using DataAccessLayer.Entities;
+﻿using BusinessLogicLayer.DTOs.Category;
+using BusinessLogicLayer.DTOs.Product;
+using DataAccessLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,10 @@ namespace BusinessLogicLayer.Services.Abstractions
 {
     public interface IProductService
     {
-        Task<Product> GetAllProductsAsync();
-        Task<Product> GetProductByIdAsync(int id);
-        Task AddProductAsync(Product product);
-        Task UpdateProductAsync(Product product);
+        Task<List<ProductDTO>> GetAllProductsAsync();
+        Task<ProductDTO> GetProductByIdAsync(int id);
+        Task AddProductAsync(CreateProductDTO createDTO);
+        Task UpdateProductAsync(UpdateProductDTO updateDTO);
         Task DeleteProductAsync(int id);
     }
 }
