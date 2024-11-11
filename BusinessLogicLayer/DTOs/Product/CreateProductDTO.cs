@@ -1,4 +1,6 @@
-﻿namespace BusinessLogicLayer.DTOs.Product
+﻿using Microsoft.AspNetCore.Http;
+
+namespace BusinessLogicLayer.DTOs.Product
 {
     public class CreateProductDTO
     {
@@ -8,5 +10,6 @@
         public decimal DiscountPrice { get; set; }
         public bool IsAvailable { get; set; }
         public int CategoryId { get; set; }
+        public List<IFormFile> Files { get; set; }
     }
 }

@@ -1,0 +1,17 @@
+﻿@using BusinessLogicLayer.DTOs.Product
+@model ProductDTO
+
+<div class="container">
+    <h2>@Model.Name</h2>
+    <p>@Model.Description</p>
+    <h4>Price: @Model.Price.ToString("C")</h4>
+
+    <div class="product-images">
+        @foreach (var image in Model.Images)
+        {
+            <img src="@image.ImageUrl" alt="@Model.Name" class="img-thumbnail" style="width: 200px; height: auto; margin: 5px;" />
+        }
+    </div>
+
+    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Back to Products</a>
+</div>

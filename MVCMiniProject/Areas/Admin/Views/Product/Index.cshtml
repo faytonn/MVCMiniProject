@@ -1,0 +1,39 @@
+﻿@using BusinessLogicLayer.DTOs.Product
+@model List<ProductDTO>
+
+<h2>Products</h2>
+<a asp-action="Create" class="btn btn-primary mb-3">Add New Product</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Images</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Price.ToString("C")</td>
+                <td>@product.CategoryId</td>
+                <td>
+                    @foreach (var image in product.Images)
+                    {
+                        <img src="@image.ImageUrl" alt="@product.Name" style="width: 100px; height: auto;" />
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@product.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

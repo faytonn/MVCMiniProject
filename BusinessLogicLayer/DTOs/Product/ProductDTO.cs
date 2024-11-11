@@ -1,4 +1,6 @@
-﻿namespace BusinessLogicLayer.DTOs.Product
+﻿using BusinessLogicLayer.DTOs.ProductImage;
+
+namespace BusinessLogicLayer.DTOs.Product
 {
     public class ProductDTO
     {
@@ -10,5 +12,6 @@
         public bool IsAvailable { get; set; }
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
+        public List<ProductImageDTO> Images { get; set; }
     }
 }
