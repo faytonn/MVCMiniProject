@@ -1,4 +1,4 @@
-﻿@using DataAccessLayer.Entities
+﻿@* @using DataAccessLayer.Entities
 @model List<Product>
 <div class="product-slider multiple-row  slider-border-multiple-row  sb-slick-slider"
      data-slick-setting='{
@@ -27,10 +27,10 @@
                 </div>
                 <div class="product-card--body">
                     <div class="card-image">
-                        <img src="~/image/products/@item.ProductImages.FirstOrDefault(x=>x.Status==true)?.Name" alt="">
+                        <img src="~/~/image/products/@item.ProductImages.FirstOrDefault(x=>x.Status==true)?.Name" alt="">
                         <div class="hover-contents">
                             <a href="product-details.html" class="hover-image">
-                                <img src="~/image/products/@item.ProductImages.FirstOrDefault(x=>x.Status==false)?.Name" alt="">
+                                <img src="~/~/image/products/@item.ProductImages.FirstOrDefault(x=>x.Status==false)?.Name" alt="">
                             </a>
                             <div class="hover-btns">
 
@@ -61,4 +61,4 @@
             </div>
         </div>
     }
-</div>
+</div> *@
