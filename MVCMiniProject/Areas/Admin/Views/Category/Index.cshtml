@@ -1,22 +1,39 @@
-﻿@model IEnumerable<DataAccessLayer.Entities.Category>
+﻿@using BusinessLogicLayer.DTOs.Category
+@model List<CategoryDTO>
 
-<h2>Categories</h2>
-<table class="table">
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Actions</th>
-    </tr>
-    @foreach (var category in Model)
-    {
-        <tr>
-            <td>@category.Name</td>
-            <td>@category.Description</td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@category.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@category.Id">Delete</a>
-            </td>
-        </tr>
-    }
-</table>
-<a asp-action="Create" class="btn btn-primary">Create New Category</a>
+@{
+    int counter = 0;
+}
+
+<div class="container-fluid">
+    <div class="row align-items-center justify-content-between">
+        <h1>Categories:</h1>
+        <a asp-action="create" asp-controller="category" class="btn btn-primary">Create</a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Parent Category</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                counter++;
+                <tr>
+                    <th scope="row">@counter</th>
+                    <td>@item.Name</td>
+                    <td>@(item.ParentName ?? "None")</td>
+                    <td>
+                        <a asp-action="update" asp-controller="category" asp-route-id="@item.Id" class="btn btn-warning">Update</a>
+                        <a asp-action="delete" asp-controller="category" asp-route-id="@item.Id" class="btn btn-danger delete-btn">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

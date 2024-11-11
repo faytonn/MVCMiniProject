@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Entities
 {
-    public class Service : BaseEntity
+    public class Attendance : BaseEntity
     {
         public int Id { get; set; }
         public string Icon { get; set; } //can be image url or something from the assets files

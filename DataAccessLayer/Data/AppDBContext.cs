@@ -14,7 +14,7 @@ namespace MVCMiniProject.DataAccessLayer
         }
 
         public DbSet<Slider> Sliders { get; set; }
-        public DbSet<Service> Services { get; set; }
+        public DbSet<Attendance> Services { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductTag> ProductTags { get; set; }

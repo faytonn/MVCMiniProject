@@ -1,7 +1,10 @@
-﻿using DataAccessLayer.Entities;
+﻿using BusinessLogicLayer.DTOs;
+using BusinessLogicLayer.DTOs.Category;
+using BusinessLogicLayer.Services;
+using BusinessLogicLayer.Services.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MVCMiniProject.DataAccessLayer;
+using System.Threading.Tasks;
 
 namespace MVCMiniProject.Areas.Admin.Controllers
 {
@@ -9,17 +12,17 @@ namespace MVCMiniProject.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
-        private readonly AppDBContext _dbContext;
+        private readonly ICategoryService _categoryService;
 
-        public CategoryController(AppDBContext dbContext)
+        public CategoryController(ICategoryService categoryService)
         {
-            _dbContext = dbContext;
+            _categoryService = categoryService;
         }
 
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var categories = _dbContext.Categories.ToList();
-            return View();
+            var categories = await _categoryService.GetAllCategoriesAsync();
+            return View(categories);
         }
 
         public IActionResult Create()
@@ -29,66 +32,49 @@ namespace MVCMiniProject.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category category)
+        public async Task<IActionResult> Create(CreateCategoryDTO dto)
         {
             if (!ModelState.IsValid)
-            {
-                return View(category);
-            }
+                return View(dto);
 
-            _dbContext.Categories.Add(category);
-            _dbContext.SaveChanges();
+            await _categoryService.AddCategoryAsync(dto);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Update(int id)
+        public async Task<IActionResult> Update(int id)
         {
-            var category = _dbContext.Categories.FirstOrDefault(c => c.Id == id);
-
+            var category = await _categoryService.GetCategoryByIdAsync(id);
             if (category == null)
-            {
                 return NotFound();
-            }
 
             return View(category);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update(Category category)
+        public async Task<IActionResult> Update(UpdateCategoryDTO dto)
         {
             if (!ModelState.IsValid)
-            {
-                return View(category);
-            }
+                return View(dto);
 
-            _dbContext.Categories.Update(category);
-            _dbContext.SaveChanges();
+            await _categoryService.UpdateCategoryAsync(dto);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var category = _dbContext.Categories.FirstOrDefault(c => c.Id == id);
+            var category = await _categoryService.GetCategoryByIdAsync(id);
             if (category == null)
-            {
                 return NotFound();
-            }
+
             return View(category);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult ConfirmDelete(int id)
+        public async Task<IActionResult> ConfirmDelete(int id)
         {
-            var category = _dbContext.Categories.Find(id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            _dbContext.Categories.Remove(category);
-            _dbContext.SaveChanges();
+            await _categoryService.DeleteCategoryAsync(id);
             return RedirectToAction(nameof(Index));
         }
     }

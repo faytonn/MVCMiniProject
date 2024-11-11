@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using BusinessLogicLayer.DTOs.Tag;
 using BusinessLogicLayer.Repositories.Generic.Abstractions;
+using BusinessLogicLayer.Services.Abstractions;
 using DataAccessLayer.Entities;
 
 namespace BusinessLogicLayer.Services.Implementations
 {
-    public class TagService
+    public class TagService:ITagService
     {
         private readonly IRepository<Tag> _repository;
         private readonly IMapper _mapper;
