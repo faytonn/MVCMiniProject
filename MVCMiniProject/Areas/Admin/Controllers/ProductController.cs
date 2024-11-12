@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MVCMiniProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Moderator")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
@@ -116,7 +116,7 @@ namespace MVCMiniProject.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var product = await _productService.GetProductByIdAsync(id);

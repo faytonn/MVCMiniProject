@@ -1,3 +1,4 @@
+using BusinessLogicLayer.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using MVCMiniProject.Models;
 using System.Diagnostics;
@@ -7,26 +8,19 @@ namespace MVCMiniProject.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ISliderService _sliderService;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var sliders = await _sliderService.GetAllAsync();
+
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+       
     }
 }

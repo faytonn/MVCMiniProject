@@ -1,15 +1,12 @@
-﻿using BusinessLogicLayer.DTOs;
-using BusinessLogicLayer.DTOs.Category;
-using BusinessLogicLayer.Services;
+﻿using BusinessLogicLayer.DTOs.Category;
 using BusinessLogicLayer.Services.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace MVCMiniProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Moderator")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -61,6 +58,7 @@ namespace MVCMiniProject.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var category = await _categoryService.GetCategoryByIdAsync(id);
