@@ -1,4 +1,6 @@
-﻿using BusinessLogicLayer.DTOs.ProductImage;
+﻿using BusinessLogicLayer.DTOs.Category;
+using BusinessLogicLayer.DTOs.ProductImage;
+using BusinessLogicLayer.DTOs.ProductTag;
 
 namespace BusinessLogicLayer.DTOs.Product
 {
@@ -11,7 +13,8 @@ namespace BusinessLogicLayer.DTOs.Product
         public decimal DiscountPrice { get; set; }
         public bool IsAvailable { get; set; }
         public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
-        public List<ProductImageDTO> Images { get; set; }
+        public CategoryDTO Category { get; set; }
+        public List<string> ProductImages { get; set; }
+        public List<string> ProductTags { get; set; }
     }
 }

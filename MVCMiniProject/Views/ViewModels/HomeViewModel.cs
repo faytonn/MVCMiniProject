@@ -1,4 +1,5 @@
 ﻿using AutoMapper.Features;
+using BusinessLogicLayer.DTOs.Slider;
 using DataAccessLayer.Entities;
 
 namespace MVCMiniProject.Views.ViewModels
@@ -11,7 +12,7 @@ namespace MVCMiniProject.Views.ViewModels
 
         public List<Product> DiscountedProducts { get; set; }
 
-        public List<Slider> Sliders { get; set; }
+        public List<SliderDTO> Sliders { get; set; }
 
     }
 }

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using BusinessLogicLayer.DTOs.Category;
+using BusinessLogicLayer.DTOs.Product;
 using BusinessLogicLayer.Repositories.Generic.Abstractions;
 using BusinessLogicLayer.Services.Abstractions;
+using BusinessLogicLayer.ViewModels.Common;
 using DataAccessLayer.Entities;
 
 namespace BusinessLogicLayer.Services.Implementations
@@ -54,5 +56,24 @@ namespace BusinessLogicLayer.Services.Implementations
                 await _repository.SaveChangesAsync();
             }
         }
+
+        public async Task<TPageableViewModel<CategoryDTO>> GetPaginatedAllAsync(int pageIndex = 1, int pageSize = 10)
+        {
+            var paginatedData = await _repository.GetPaginatedAllAsync<Category>(pageIndex, pageSize);
+
+            var dtoItems = paginatedData.Items.Select(item => _mapper.Map<CategoryDTO>(item)).ToList();
+
+            return new TPageableViewModel<CategoryDTO>
+            {
+                Items = dtoItems,
+                Index = paginatedData.Index,
+                Size = paginatedData.Size,
+                Count = paginatedData.Count,
+                Pages = paginatedData.Pages,
+                HasPrevious = paginatedData.HasPrevious,
+                HasNext = paginatedData.HasNext
+            };
+        }
+
     }
 }

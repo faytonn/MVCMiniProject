@@ -3,11 +3,13 @@ using BusinessLogicLayer.DTOs.BasketItem;
 using BusinessLogicLayer.DTOs.Category;
 using BusinessLogicLayer.DTOs.Product;
 using BusinessLogicLayer.DTOs.ProductImage;
+using BusinessLogicLayer.DTOs.ProductTag;
 using BusinessLogicLayer.DTOs.Service;
 using BusinessLogicLayer.DTOs.Setting;
 using BusinessLogicLayer.DTOs.Slider;
 using BusinessLogicLayer.DTOs.Subscribe;
 using BusinessLogicLayer.DTOs.Tag;
+using CoreLayer.Entities;
 using DataAccessLayer.Entities;
 
 namespace BusinessLogicLayer
@@ -16,6 +18,8 @@ namespace BusinessLogicLayer
     {
         public MappingProfile()
         {
+
+
             CreateMap<Product, ProductDTO>().ReverseMap();
             CreateMap<Product, CreateProductDTO>().ReverseMap();
             CreateMap<Product, UpdateProductDTO>().ReverseMap();
@@ -55,6 +59,10 @@ namespace BusinessLogicLayer
             CreateMap<Subscribe, SubscribeDTO>().ReverseMap();
             CreateMap<Subscribe, CreateSubscribeDTO>().ReverseMap();
             CreateMap<Subscribe, UpdateSubscribeDTO>().ReverseMap();
+
+            CreateMap<ProductTag, ProductTagDTO>().ReverseMap();
+            CreateMap<ProductTag, CreateProductTagDTO>().ReverseMap();
+            CreateMap<ProductTag, UpdateProductTagDTO>().ReverseMap();
 
         }
     }

@@ -29,6 +29,7 @@ namespace MVCMiniProject.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var products = await _productService.GetAllProductsAsync();
+
             return View(products);
         }
 
