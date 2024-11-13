@@ -1,6 +1,7 @@
 using BusinessLogicLayer.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using MVCMiniProject.Models;
+using MVCMiniProject.Views.ViewModels;
 using System.Diagnostics;
 
 namespace MVCMiniProject.Controllers
@@ -18,6 +19,12 @@ namespace MVCMiniProject.Controllers
         public async Task<IActionResult> Index()
         {
             var sliders = await _sliderService.GetAllAsync();
+            var viewModel = new HomeViewModel
+            {
+                Sliders = sliders.ToList()
+            };
+
+            return View(viewModel);
 
         }
 
