@@ -45,7 +45,7 @@ namespace BusinessLogicLayer.Services.Implementations
 
         public async Task<ProductTagDTO> GetByIdAsync(int id)
         {
-            var productTag = await _repository.GetByIdAsync(id);\
+            var productTag = await _repository.GetByIdAsync(id);
 
             return _mapper.Map<ProductTagDTO>(productTag);
         }
