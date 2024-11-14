@@ -1,22 +1,25 @@
-﻿using DataAccessLayer.Entities;
+﻿using AutoMapper;
+using BusinessLogicLayer.Repositories.Generic.Abstractions;
+using BusinessLogicLayer.Services.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MVCMiniProject.DataAccessLayer;
+
 
 namespace MVCMiniProject.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly AppDBContext _dbContext;
-
-        public CategoryController(AppDBContext dbContext)
+        private readonly ICategoryService _categoryService; //DBCONTEXT NIYE BURDADII ne olmalidi c:Niye arxitektura ile yaziriq Repository Service o boyda kod niye var
+        private readonly IMapper _mapper;
+        public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
-            _dbContext = dbContext;
+            _categoryService = categoryService;
+            _mapper = mapper;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var categories = _dbContext.Categories.ToList();
+            var categories = await _categoryService.Getp
             return View();
         }
     }

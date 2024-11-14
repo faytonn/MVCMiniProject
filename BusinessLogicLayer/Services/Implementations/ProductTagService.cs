@@ -36,11 +36,11 @@ namespace BusinessLogicLayer.Services.Implementations
             }
         }
 
-        public Task<List<ProductTagDTO>> GetAllAsync()
+        public async Task<List<ProductTagDTO>> GetAllAsync()
         {
-            var productTags = _repository.GetAllAsync();
-
+            var productTags = await _repository.GetAllAsync();
             return _mapper.Map<List<ProductTagDTO>>(productTags);
+
         }
 
         public async Task<ProductTagDTO> GetByIdAsync(int id)
@@ -49,9 +49,14 @@ namespace BusinessLogicLayer.Services.Implementations
 
             return _mapper.Map<ProductTagDTO>(productTag);
         }
-        public void Update(UpdateProductTagDTO productTagDTO)
+        public async Task Update(UpdateProductTagDTO productTagDTO)
         {
-            throw new NotImplementedException();
+            var productTag = await _repository.GetByIdAsync(productTagDTO.Id);
+            if (productTag == null) return;
+
+            _mapper.Map(productTagDTO, productTag);
+            _repository.Update(productTag);
+            await _repository.SaveChangesAsync();
         }
     }
 }

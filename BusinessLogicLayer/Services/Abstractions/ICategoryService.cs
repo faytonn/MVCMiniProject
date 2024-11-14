@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.DTOs.Category;
+using BusinessLogicLayer.ViewModels.Common;
 
 namespace BusinessLogicLayer.Services.Abstractions
 {
@@ -9,6 +10,7 @@ namespace BusinessLogicLayer.Services.Abstractions
         Task AddCategoryAsync(CreateCategoryDTO createCategoryDto);
         Task UpdateCategoryAsync(UpdateCategoryDTO updateCategoryDto);
         Task DeleteCategoryAsync(int id);
+        Task<TPageableViewModel<CategoryDTO>> GetPaginatedAllAsync(int pageIndex = 1, int pageSize = 10)
 
     }
 }

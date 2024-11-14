@@ -1,4 +1,5 @@
-﻿using BusinessLogicLayer.DTOs.Category;
+﻿using AutoMapper;
+using BusinessLogicLayer.DTOs.Category;
 using BusinessLogicLayer.Services.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,15 +11,17 @@ namespace MVCMiniProject.Areas.Admin.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
+        private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
+            _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageIndex = 1, int pageSize = 10)
         {
-            var categories = await _categoryService.GetAllCategoriesAsync();
+            var categories = await _categoryService.GetPaginatedAllAsync(pageIndex, pageSize);
             return View(categories);
         }
 

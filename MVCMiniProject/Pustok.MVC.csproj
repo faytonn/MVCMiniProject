@@ -20,9 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj" />
-    <ProjectReference Include="..\CoreLayer\CoreLayer.csproj" />
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\BusinessLogicLayer\Pustok.BLL.csproj" />
+    <ProjectReference Include="..\CoreLayer\Pustok.Core.csproj" />
+    <ProjectReference Include="..\DataAccessLayer\Pustok.DAL.csproj" />
   </ItemGroup>
 
 </Project>

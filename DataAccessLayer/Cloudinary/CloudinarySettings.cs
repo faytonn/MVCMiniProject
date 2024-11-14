@@ -7,3 +7,7 @@
         public string ApiSecret { get; set; }
     }
 }
+
+
+//bu niye burdadi
+// hele hec ne elememisem ozum elemey calisirdim dedim axirda ederem :D

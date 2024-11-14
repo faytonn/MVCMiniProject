@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoreLayer\CoreLayer.csproj" />
+    <ProjectReference Include="..\CoreLayer\Pustok.Core.csproj" />
   </ItemGroup>
 
 </Project>

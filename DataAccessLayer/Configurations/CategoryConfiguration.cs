@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataAccessLayer.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccessLayer.Configurations
+namespace Pustok.DAL.Configurations
 {
-    internal class CategoryConfiguration
+    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
+
+        public void Configure(EntityTypeBuilder<Category> builder)
+        {
+            builder.Property(x => x.Name).IsRequired().HasMaxLength(256);
+            builder.Property(x => x.ParentId).IsRequired(false);
+
+            builder.HasOne(c => c.Parent).WithMany(c => c.Children).HasForeignKey(c => c.ParentId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasIndex(c => c.ParentId);
+
+        }
     }
 }

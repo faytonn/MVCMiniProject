@@ -7,7 +7,7 @@ namespace BusinessLogicLayer.Services.Abstractions
         Task<List<ProductTagDTO>> GetAllAsync();
         Task<ProductTagDTO> GetByIdAsync(int id);
         Task<ProductTagDTO> CreateAsync(CreateProductTagDTO productTagDTO);
-        void Update(UpdateProductTagDTO productTagDTO);
+        Task Update(UpdateProductTagDTO productTagDTO);
         Task DeleteAsync(int id);
     }
 }

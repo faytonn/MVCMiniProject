@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoreLayer\CoreLayer.csproj" />
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\CoreLayer\Pustok.Core.csproj" />
+    <ProjectReference Include="..\DataAccessLayer\Pustok.DAL.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,39 +1,41 @@
-﻿@using BusinessLogicLayer.DTOs.Category
-@model List<CategoryDTO>
+﻿@model Category
 
-@{
-    int counter = 0;
-}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Settings</h4>
+            <p class="card-description">
+                <a asp-action="Create" class="btn btn-success">Create</a>
+            </p>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Action</th>
 
-<div class="container-fluid">
-    <div class="row align-items-center justify-content-between">
-        <h1>Categories:</h1>
-        <a asp-action="create" asp-controller="category" class="btn btn-primary">Create</a>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items ?? [])
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td><img src="~/image/category/@item.ImageUrl"></td>
+                                <td>@item.Name</td>
+                                <td>
+                                    <a class="btn btn-secondary" asp-controller="category" asp-action="details" asp-route-id="@item.Id">Details</a>
+                                    <a class="btn btn-warning" asp-controller="category" asp-action="update" asp-route-id="@item.Id">Update</a>
+                                    <a class="btn btn-danger" asp-controller="category" asp-action="delete" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Parent Category</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                counter++;
-                <tr>
-                    <th scope="row">@counter</th>
-                    <td>@item.Name</td>
-                    <td>@(item.ParentName ?? "None")</td>
-                    <td>
-                        <a asp-action="update" asp-controller="category" asp-route-id="@item.Id" class="btn btn-warning">Update</a>
-                        <a asp-action="delete" asp-controller="category" asp-route-id="@item.Id" class="btn btn-danger delete-btn">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
 </div>

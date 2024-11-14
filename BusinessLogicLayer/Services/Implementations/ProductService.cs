@@ -4,6 +4,9 @@ using BusinessLogicLayer.Repositories.Generic.Abstractions;
 using BusinessLogicLayer.Services.Abstractions;
 using BusinessLogicLayer.ViewModels.Common;
 using DataAccessLayer.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
+using MVCMiniProject.DataAccessLayer;
 
 namespace BusinessLogicLayer.Services.Implementations
 {
@@ -11,6 +14,7 @@ namespace BusinessLogicLayer.Services.Implementations
     {
         private readonly IRepository<Product> _repository;
         private readonly IMapper _mapper;
+        private readonly AppDBContext _context;
 
         public ProductService(IRepository<Product> repository, IMapper mapper)
         {
@@ -74,6 +78,22 @@ namespace BusinessLogicLayer.Services.Implementations
                 HasPrevious = paginatedData.HasPrevious,
                 HasNext = paginatedData.HasNext
             };
+        }
+
+        public async Task<List<ProductDTO>> GetProductsByCategoryAsync(int categoryId)
+        {
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.CategoryId == categoryId)
+                .Select(p => new ProductDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price
+                })
+                .ToListAsync();
+
+            return products;
         }
 
 

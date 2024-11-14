@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Configurations
+namespace Pustok.DAL.Configurations
 {
     internal class TagConfiguration
     {
